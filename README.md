@@ -1,6 +1,6 @@
-Kill Switch VPN
+# Kill Switch VPN
 
-This script allows all traffic from the outbound connection to the Internet to be redirected to the vpn network interface that is in use, preventing access to the internet output to occur by other network interface even if the vpn connection closes. It allow connection input only on 22 port.
+This script allows all traffic from the outbound connection to the internet to be redirected to the vpn network interface that is in use, preventing access to the internet output to occur by other network interface even if the vpn connection closes. It allow connection input only on 22 port.
 
 ```
 Usage:  git clone https://github.com/jeffersonscfilho/killswitchvpn.git

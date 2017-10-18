@@ -1,0 +1,37 @@
+#!/bin/bash
+
+iptables -A INPUT -p tcp -i eth+ --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp -i wlan+ --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -i tun+ -j ACCEPT
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -j DROP
+
+iptables -A FORWARD -i tun+ -j ACCEPT
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -j DROP
+
+iptables -A OUTPUT -p udp -m udp --dport 1198 -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
+iptables -A OUTPUT -o tun+ -j ACCEPT
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -j DROP
+
+ip6tables -A INPUT -p tcp -i eth+ --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+ip6tables -A INPUT -p tcp -i wlan+ --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+ip6tables -A INPUT -i lo -j ACCEPT
+ip6tables -A INPUT -i tun+ -j ACCEPT
+ip6tables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+ip6tables -A INPUT -j DROP
+
+ip6tables -A FORWARD -i tun+ -j ACCEPT
+ip6tables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+ip6tables -A FORWARD -j DROP
+
+ip6tables -A OUTPUT -p udp -m udp --dport 1198 -j ACCEPT
+ip6tables -A OUTPUT -o lo -j ACCEPT
+ip6tables -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
+ip6tables -A OUTPUT -o tun+ -j ACCEPT
+ip6tables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+ip6tables -A OUTPUT -j DROP
